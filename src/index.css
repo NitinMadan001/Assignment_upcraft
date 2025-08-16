@@ -1,0 +1,15 @@
+@import url('./styles/base.css');
+@import url('./styles/dashboard.css');
+
+/* CRA default resets can stay minimal here */
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
