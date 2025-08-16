@@ -1,70 +1,221 @@
-# Getting Started with Create React App
+# Tutor Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React dashboard designed for tutors to manage their students, lessons, and performance metrics.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### 📊 Dashboard Overview
+- **Profile Card**: Tutor information with avatar, completion ring, and key metrics
+- **KPI Cards**: Display important statistics (Active Students, CSAT Score, Assignment Completion Rate)
+- **Upcoming Lessons**: Table view of scheduled lessons with student details
+- **Performance Gauges**: Visual representation of course and student performance scores
+- **Refer & Earn Card**: Call-to-action for referral program
+- **Feedback Gauge**: Pending feedback notifications
 
-### `npm start`
+### 📱 Responsive Design
+- **Desktop**: Multi-column grid layout with sidebar navigation
+- **Tablet**: Adapted layout with responsive grid adjustments
+- **Mobile**: Single-column stack with bottom navigation bar
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+src/
+├── components/
+│   ├── Cards/
+│   │   ├── ProfileCard.jsx
+│   │   ├── StatCard.jsx
+│   │   └── ReferCard.jsx
+│   ├── Tables/
+│   │   └── UpcomingLessons.jsx
+│   └── Charts/
+│       ├── ScoreGauge.jsx
+│       └── FeedbackGauge.jsx
+├── data/
+│   └── dashboard.js
+├── pages/
+│   └── Dashboard.jsx
+└── styles/
+    ├── base.css
+    └── dashboard.css
+```
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+   ```bash
+   git clone [your-repo-url]
+   cd tutor-dashboard
+   ```
 
-### `npm run build`
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## CSS Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Base Styles (`base.css`)
+- Global variables and color scheme
+- Layout components (sidebar, header, main content)
+- Responsive navigation system
+- Mobile-first breakpoints
 
-### `npm run eject`
+### Dashboard Styles (`dashboard.css`)
+- Grid layouts for dashboard components
+- Component-specific styling
+- Responsive breakpoints and adjustments
+- Mobile optimization
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Responsive Breakpoints
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Device | Max Width | Layout Changes |
+|--------|-----------|----------------|
+| Desktop | > 1024px | Multi-column grid, fixed sidebar |
+| Tablet | ≤ 1024px | Responsive grid, natural height |
+| Mobile | ≤ 768px | Single column, bottom navigation |
+| Small Mobile | ≤ 480px | Compressed spacing and typography |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Key Components
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Dashboard Layout
+```jsx
+<div className="dashboard-page">
+  <div className="main-col">
+    <div className="top-grid">
+      {/* Profile Card + KPI Cards */}
+    </div>
+    <div className="bottom-grid">
+      {/* Lessons Table + Performance Gauges */}
+    </div>
+  </div>
+  <div className="right-column">
+    {/* Refer Card + Feedback Gauge */}
+  </div>
+</div>
+```
 
-## Learn More
+### Responsive Grid Behavior
+- **Desktop**: `grid-template-columns: 1fr 300px`
+- **Tablet/Mobile**: `grid-template-columns: 1fr` (stacked)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Customization
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Colors
+Update CSS variables in `base.css`:
+```css
+:root {
+  --bg: #f6f7fb;
+  --white: #ffffff;
+  --purple-700: #5a2bd6;
+  --purple-600: #6a3df0;
+  --purple-500: #7b57f5;
+  --text-900: #111827;
+  --text-700: #374151;
+  --text-500: #6b7280;
+  --border: #e5e7eb;
+}
+```
 
-### Code Splitting
+### Component Data
+Modify dashboard data in `data/dashboard.js`:
+```javascript
+export const tutor = {
+  name: "John Doe",
+  role: "Math Tutor",
+  // ... other properties
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+export const kpis = [
+  { id: 1, title: "Total Active Students", value: 30 },
+  // ... other KPIs
+];
+```
 
-### Analyzing the Bundle Size
+## Mobile Navigation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The sidebar transforms into a bottom navigation bar on mobile devices:
+- Icons with labels
+- Touch-friendly spacing
+- Horizontal layout
+- Auto-hiding logo and footer
 
-### Making a Progressive Web App
+## Performance Optimizations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Height Management
+- Desktop: Fixed viewport height to prevent scrolling
+- Tablet/Mobile: Natural content height with scrolling as needed
+- Flex containers with `min-height: 0` for proper shrinking
 
-### Advanced Configuration
+### Responsive Images
+- Avatar with completion ring animation
+- Scalable icons and graphics
+- Optimized for different screen densities
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Browser Support
 
-### Deployment
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile Safari (iOS 12+)
+- Chrome Mobile (Android 8+)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Development Guidelines
 
-### `npm run build` fails to minify
+### Adding New Components
+1. Create component in appropriate folder (`components/`)
+2. Add styling to `dashboard.css`
+3. Ensure mobile responsiveness
+4. Test across all breakpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Responsive Design Rules
+1. Mobile-first approach
+2. Use CSS Grid for layout, Flexbox for alignment
+3. Test on actual devices, not just browser dev tools
+4. Maintain touch-friendly interactive elements (44px minimum)
+
+### CSS Best Practices
+1. Use CSS custom properties for theming
+2. Follow BEM naming convention where applicable
+3. Group related styles together
+4. Comment complex layout logic
+
+## Troubleshooting
+
+### Common Issues
+
+**Vertical Scrolling on Desktop**
+- Check container heights and `overflow` properties
+- Ensure `min-height: 0` on flex containers
+
+**Layout Breaking on Mobile**
+- Verify responsive breakpoints
+- Check grid template columns
+- Test with actual device viewport
+
+**Performance Gauges Not Displaying**
+- Ensure chart library is properly imported
+- Check data format and props
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test responsiveness across all breakpoints
+5. Submit a pull request
+
+## License
+
+MIT License - feel free to use this dashboard template for your projects.
+
+---
+
+**Built with React, CSS Grid, and Flexbox for modern, responsive web experiences.**
+
